@@ -2,6 +2,10 @@
 
 > Get the metadata from a Google Cloud Platform environment.
 
+[![Current version](https://img.shields.io/packagist/v/kreait/gcp-metadata.svg)](https://packagist.org/packages/kreait/gcp-metadata)
+[![Supported PHP version](https://img.shields.io/packagist/php-v/kreait/gcp-metadata.svg)]()
+[![GitHub license](https://img.shields.io/github/license/kreait/gcp-metadata-php.svg)](https://github.com/kreait/gcp-metadata-php/blob/master/LICENSE)
+
 ```bash
 $ composer install kreait/gcp-metadata
 ```
