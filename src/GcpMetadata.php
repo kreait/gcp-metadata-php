@@ -10,6 +10,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use Kreait\GcpMetadata\Error;
 use Psr\Http\Message\ResponseInterface;
 
 class GcpMetadata

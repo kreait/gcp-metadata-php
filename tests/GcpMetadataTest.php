@@ -10,6 +10,7 @@ use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Kreait\GcpMetadata\Error;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Http\Message\RequestInterface;
