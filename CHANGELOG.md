@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.0.1 - 2018-07-28
 
 ### Bugfixes
 
