@@ -4,6 +4,7 @@
 
 * Use IP address instead of hostname for the Google Metadata service to avoid slow requests when not on Compute Engine
 * The availability status of the Metadata Service is now cached to save requests
+* Configured the underlying HTTP client to be less resilient, but faster
 
 ## 1.0.1 - 2018-07-28
 
