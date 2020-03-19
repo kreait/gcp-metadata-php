@@ -24,6 +24,11 @@ class GcpMetadata
      */
     private $client;
 
+    /**
+     * @var null|bool
+     */
+    private $isAvailable;
+
     public function __construct(ClientInterface $client = null)
     {
         $this->client = $client;
@@ -31,11 +36,15 @@ class GcpMetadata
 
     public function isAvailable(): bool
     {
+        if ($this->isAvailable !== null) {
+            return $this->isAvailable;
+        }
+
         try {
             $this->instance();
-            return true;
+            return $this->isAvailable = true;
         } catch (\Throwable $e) {
-            return false;
+            return $this->isAvailable = false;
         }
     }
 
