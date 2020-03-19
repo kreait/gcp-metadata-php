@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class GcpMetadata
 {
-    const baseUrl = 'http://metadata.google.internal/computeMetadata/v1/';
+    const baseUrl = 'http://169.254.169.254/computeMetadata/v1/';
     const flavorHeaderName = 'Metadata-Flavor';
     const flavorHeaderValue = 'Google';
 
