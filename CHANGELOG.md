@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.1.0 - 2020-03-19
 
 * Use IP address instead of hostname for the Google Metadata service to avoid slow requests when not on Compute Engine
 * The availability status of the Metadata Service is now cached to save requests
