@@ -4,8 +4,8 @@
 
 [![Current version](https://img.shields.io/packagist/v/kreait/gcp-metadata.svg)](https://packagist.org/packages/kreait/gcp-metadata)
 [![Supported PHP version](https://img.shields.io/packagist/php-v/kreait/gcp-metadata.svg)]()
-[![GitHub license](https://img.shields.io/github/license/kreait/gcp-metadata-php.svg)](https://github.com/kreait/gcp-metadata-php/blob/master/LICENSE)
-[![Unit Tests](https://github.com/kreait/gcp-metadata-php/workflows/Unit%20Tests/badge.svg?branch=master)](https://github.com/kreait/gcp-metadata-php/actions)
+[![GitHub license](https://img.shields.io/github/license/kreait/gcp-metadata-php.svg)](https://github.com/kreait/gcp-metadata-php/blob/main/LICENSE)
+[![Unit Tests](https://github.com/kreait/gcp-metadata-php/workflows/Unit%20Tests/badge.svg)](https://github.com/kreait/gcp-metadata-php/actions)
 
 ```bash
 $ composer install kreait/gcp-metadata

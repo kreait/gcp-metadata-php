@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Unreleased
+
+* The default branch of the GitHub repository has been renamed from `master` to `main` - 
+  if you're using `dev-master` as a version constraint in your `composer.json`, please 
+  update it to `dev-main`.
+
 ## 1.1.0 - 2020-03-19
 
 * Use IP address instead of hostname for the Google Metadata service to avoid slow requests when not on Compute Engine
