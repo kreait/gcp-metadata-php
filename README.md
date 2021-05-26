@@ -6,6 +6,8 @@
 [![Supported PHP version](https://img.shields.io/packagist/php-v/kreait/gcp-metadata.svg)]()
 [![GitHub license](https://img.shields.io/github/license/kreait/gcp-metadata-php.svg)](https://github.com/kreait/gcp-metadata-php/blob/main/LICENSE)
 [![Unit Tests](https://github.com/kreait/gcp-metadata-php/workflows/Unit%20Tests/badge.svg)](https://github.com/kreait/gcp-metadata-php/actions)
+[![Discord](https://img.shields.io/discord/807679292573220925.svg?color=7289da&logo=discord)](https://discord.gg/Yacm7unBsr)
+[![Sponsor](https://img.shields.io/static/v1?logo=GitHub&label=Sponsor&message=%E2%9D%A4&color=ff69b4)](https://github.com/sponsors/jeromegamez)
 
 ```bash
 $ composer install kreait/gcp-metadata
