@@ -2,9 +2,10 @@
 
 ## Unreleased
 
-* The default branch of the GitHub repository has been renamed from `master` to `main` - 
-  if you're using `dev-master` as a version constraint in your `composer.json`, please 
-  update it to `dev-main`.
+* Added support for Guzzle 7
+* Raised minimum required Guzzle 6 version from 6.0 to 6.3.3
+* Added support for PHP 8
+* Dropped support for PHP <7.2
 
 ## 1.1.0 - 2020-03-19
 

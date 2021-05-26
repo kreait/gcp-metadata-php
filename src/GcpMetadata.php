@@ -6,15 +6,16 @@ namespace Kreait;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Kreait\GcpMetadata\Error;
 use Psr\Http\Message\ResponseInterface;
 
 class GcpMetadata
 {
-    const baseUrl = 'http://169.254.169.254/computeMetadata/v1/';
-    const flavorHeaderName = 'Metadata-Flavor';
-    const flavorHeaderValue = 'Google';
+    public const baseUrl = 'http://169.254.169.254/computeMetadata/v1/';
+    public const flavorHeaderName = 'Metadata-Flavor';
+    public const flavorHeaderValue = 'Google';
 
     /**
      * @var ClientInterface|null
@@ -72,40 +73,39 @@ class GcpMetadata
         $options = [
             'headers' => [self::flavorHeaderName => self::flavorHeaderValue],
             'query' => $params,
+            'http_errors' => false,
         ];
 
         try {
             $response = $this->client->request('GET', $url, $options);
-
-            $this->verifyHttpStatus($response);
-            $this->verifyHeaders($response);
-
-            return $this->parseResponse($response);
-        } catch (RequestException $e) {
-            $message = $e->getMessage();
-
-            if ($response = $e->getResponse()) {
-                $message .= ': '.$response->getBody();
-            }
-
-            throw new Error($message);
+        } catch (ConnectException $e) {
+            throw new Error('Unable to connect: '.$e->getMessage());
         }
+
+        $this->verifyHttpStatus($response);
+        $this->verifyHeaders($response);
+
+        return $this->parseResponse($response);
     }
 
-    private function verifyHttpStatus(ResponseInterface $response)
+    private function verifyHttpStatus(ResponseInterface $response): void
     {
         if (($statusCode = $response->getStatusCode()) !== 200) {
             throw new Error('Unsuccessful response status code: '.$statusCode);
         }
     }
 
-    private function verifyHeaders(ResponseInterface $response)
+    private function verifyHeaders(ResponseInterface $response): void
     {
         if ($response->getHeaderLine(self::flavorHeaderName) !== self::flavorHeaderValue) {
             throw new Error('"'.self::flavorHeaderName.'" header is missing or incorrect.');
         }
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @return string|string[]
+     */
     private function parseResponse(ResponseInterface $response)
     {
         $body = trim((string) $response->getBody());

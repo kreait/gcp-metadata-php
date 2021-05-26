@@ -5,56 +5,64 @@ on:
 
 jobs:
   unit-tests:
-    name: PHP ${{matrix.php}}, ${{matrix.os}}, ${{matrix.stability}} deps
-    runs-on: ${{matrix.os}}
+    name: PHP ${{matrix.php}}, ${{matrix.stability}} deps
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        php: [7.0, 7.1, 7.2, 7.3, 7.4]
-        os: [ubuntu-latest, windows-latest]
+        php: [7.2, 7.3, 7.4, 8.0]
         stability: [lowest, stable]
-        exclude:
-          - stability: lowest
-            php: 7.1
-          - stability: lowest
-            php: 7.2
-          - stability: lowest
-            php: 7.3
-          - stability: lowest
-            php: 7.4
-          - os: windows-latest
-            php: 7.1
-          - os: windows-latest
-            php: 7.2
-          - os: windows-latest
-            php: 7.3
-          - os: windows-latest
-            php: 7.4
+
+    env:
+      extensions: dom, mbstring, xml
+      key: cache-v1
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+
+      - name: Setup cache environment
+        id: cache-env
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.extensions }}
+          key: ${{ env.key }}
+
+      - name: Cache extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.cache-env.outputs.dir }}
+          key: ${{ steps.cache-env.outputs.key }}
+          restore-keys: ${{ steps.cache-env.outputs.key }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v1
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{matrix.php}}
-          extensions: dom, mbstring, xml
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.extensions }}
+          tools: composer
           coverage: none
+
+      - name: Setup problem matchers for PHP
+        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
       - name: Get Composer Cache Directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{steps.composer-cache.outputs.dir}}
-          key: ${{matrix.php}}-${{runner.os}}-composer-${{matrix.stability}}-${{hashFiles('**/composer.json')}}
-          restore-keys: ${{matrix.php}}-${{runner.os}}-composer-${{matrix.stability}}-
+          key: ${{matrix.php}}-composer-${{matrix.stability}}-${{hashFiles('**/composer.json')}}
+          restore-keys: ${{matrix.php}}-${{matrix.stability}}-composer-
 
       - name: Install dependencies
         run: composer update --prefer-${{matrix.stability}} --prefer-dist --no-interaction --no-suggest --no-progress
+
+      - name: Setup Problem Matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Execute tests
         run: vendor/bin/phpunit
