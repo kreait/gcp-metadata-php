@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.2.0 - 2021-05-26
 
 * Added support for Guzzle 7
 * Raised minimum required Guzzle 6 version from 6.0 to 6.3.3
