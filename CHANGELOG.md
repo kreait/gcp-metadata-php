@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.3.0 - 2022-05-26
 
 * Dropped support for PHP <7.4
 * Raised minimum versions of Guzzle to fix [CVE-2022-29248](https://github.com/advisories/GHSA-cwmx-hcrq-mhc3)
