@@ -27,5 +27,8 @@
         "psr-4": {
             "Kreait\\": "tests"
         }
+    },
+    "scripts": {
+        "tests": "vendor/bin/phpunit"
     }
 }
